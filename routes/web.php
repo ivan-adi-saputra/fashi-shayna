@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\DashboardProductController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +22,11 @@ Route::get('/', function () {
 Route::get('dashboard', function () {
     return view('dashboard.pages.dashboard');
 })->name('dashboard');
+
+Route::get('register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
+Route::post('register', [RegisterController::class, 'store'])->name('register.store');
+
+Route::get('login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('login', [LoginController::class, 'authenticate'])->name('authenticate');
+
+Route::resource('dashboard/products', DashboardProductController::class);

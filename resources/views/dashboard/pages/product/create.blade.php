@@ -17,12 +17,12 @@
             @error('name') <div class="text-muted">{{ $message }}</div> @enderror
           </div>
           <div class="form-group">
-            <label for="type" class="form-control-label">Tipe Barang</label>
+            <label for="category" class="form-control-label">Category Barang</label>
             <input  type="text"
-                    name="type" 
-                    value="{{ old('type') }}" 
-                    class="form-control @error('type') is-invalid @enderror"/>
-            @error('type') <div class="text-muted">{{ $message }}</div> @enderror
+                    name="category" 
+                    value="{{ old('category') }}" 
+                    class="form-control @error('category') is-invalid @enderror"/>
+            @error('category') <div class="text-muted">{{ $message }}</div> @enderror
           </div>
           <div class="form-group">
             <label for="description" class="form-control-label">Deskripsi Barang</label>

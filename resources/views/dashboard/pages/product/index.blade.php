@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('dashboard.layouts.default')
 
 @section('content')
     <div class="orders">
@@ -15,7 +15,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Type</th>
+                                        <th>Category</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
                                         <th>Action</th>
@@ -25,11 +25,11 @@
                                 <tbody>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->type }}</td>
+                                    <td>{{ $item->category->name }}</td>
                                     <td>{{ $item->price }}</td>
                                     <td>{{ $item->quantity }}</td>
                                     <td>
-                                        <a href="{{ route('product-gallery', $item->id) }}" class="btn btn-info btn-sm">
+                                        <a href="" class="btn btn-info btn-sm">
                                             <i class="fa fa-picture-o"></i>
                                         </a>
                                         <a href="{{ route('products.edit', $item->id) }}" class="btn btn-primary btn-sm">
