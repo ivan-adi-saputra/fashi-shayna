@@ -6,7 +6,7 @@
         <strong>Tambah Barang</strong>
       </div>
       <div class="card-body card-block">
-        <form action="{{ route('products.store') }}" method="POST">
+        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
             <label for="name" class="form-control-label">Nama Barang</label>
@@ -15,6 +15,17 @@
                     value="{{ old('name') }}" 
                     class="form-control @error('name') is-invalid @enderror"/>
             @error('name') <div class="text-muted">{{ $message }}</div> @enderror
+          </div>
+          <div class="form-group">
+            <label for="photo" class="form-control-label">Foto Barang</label>
+            <input  type="file"
+                    name="photo" 
+                    value="{{ old('photo') }}" 
+                    accept="image/*"
+                    id="imgInp"
+                    class="form-control @error('photo') is-invalid @enderror"/>
+            <img id="blah" class="mt-3 img-fluid" width="150">
+            @error('photo') <div class="text-muted">{{ $message }}</div> @enderror
           </div>
           <div class="form-group">
             <label for="category_id" class="form-control-label">Category Barang</label>

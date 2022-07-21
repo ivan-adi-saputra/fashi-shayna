@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\ProductGalery;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class DashboardProductController extends Controller
@@ -48,6 +49,7 @@ class DashboardProductController extends Controller
         $data = $request->all();
         $data['slug'] = Str::slug($request->name);
         $data['user_id'] = auth()->user()->id;
+        $data['photo'] = $request->file('photo')->store('img');
 
         Product::create($data);
 
@@ -88,14 +90,22 @@ class DashboardProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $request, $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        $data = $request->all(); 
+        $data = $request->except(['_method', '_token']); 
         $data['slug'] = Str::slug($request->name); 
         $data['user_id'] = auth()->user()->id;
+        if( $request->file('photo') ){
+            if ( $product->photo ) {
+                Storage::delete($product->photo);
+            }
+            $data['photo'] = $request->file('photo')->store('img');
+        }
 
-        $item = Product::findOrFail($id);
-        $item->update($data);
+        // $item = Product::findOrFail($id);
+        // $item->update($data);
+        Product::where('id', $product->id)
+                  ->update($data);
 
         return redirect()->route('products.index');
     }
@@ -106,10 +116,12 @@ class DashboardProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $item = Product::findOrFail($id);
-        $item->delete();
+        if( $product->photo ){
+            Storage::delete($product->photo);
+        }
+        Product::destroy($product->id);
 
         return redirect()->route('products.index');
     }

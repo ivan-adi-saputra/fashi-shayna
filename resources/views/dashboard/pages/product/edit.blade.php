@@ -7,7 +7,7 @@
         <small>{{ $item->name }}</small>
       </div>
       <div class="card-body card-block">
-        <form action="{{ route('products.update', $item->id) }}" method="POST">
+        <form action="{{ route('products.update', $item->id) }}" method="POST" enctype="multipart/form-data">
           @method('PUT')
           @csrf
           <div class="form-group">
@@ -19,9 +19,24 @@
             @error('name') <div class="text-muted">{{ $message }}</div> @enderror
           </div>
           <div class="form-group">
+            <label for="photo" class="form-control-label">Foto Barang</label>
+            <input  type="file"
+                    name="photo" 
+                    value="{{ old('photo') }}" 
+                    accept="image/*"
+                    id="imgInp"
+                    class="form-control @error('photo') is-invalid @enderror"/>
+            @if ( $item->photo )
+              <img src="{{ asset('storage/' . $item->photo) }}" id="blah" class="mt-3 img-fluid" width="150">
+            @else 
+              <img id="blah" class="mt-3 img-fluid" width="150">
+            @endif
+            @error('photo') <div class="text-muted">{{ $message }}</div> @enderror
+          </div>
+          <div class="form-group">
             <label for="category_id" class="form-control-label">Category Barang</label>
             <br>
-            <select class="form-select" name="category_id">
+            <select class="form-control" name="category_id">
               @foreach ($categories as $category)
                 @if(old('category_id', $item->category->id) == $category->id)
                   <option value="{{ $category->id }}" selected>{{ $category->name }}</option>

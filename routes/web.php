@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardGalleryController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\DashboardTransactionController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+Route::get('product', [ProductController::class, 'index']);
 
 Route::get('register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->name('register.store');
