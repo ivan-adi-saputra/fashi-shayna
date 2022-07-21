@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardCategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardGalleryController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\DashboardTransactionController;
@@ -30,9 +31,7 @@ Route::get('login', [LoginController::class, 'index'])->name('login')->middlewar
 Route::post('login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('dashboard', function () {
-    return view('dashboard.pages.dashboard');
-})->name('dashboard')->middleware('auth');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 Route::get('dashboard/products/{id}/gallery', [DashboardProductController::class, 'gallery'])->name('products-gallery')->middleware('auth');
 

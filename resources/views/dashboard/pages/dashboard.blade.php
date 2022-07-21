@@ -15,7 +15,7 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text">$ <span class="count">100</span></div>
+                                <div class="stat-text">$ <span class="count">{{ $income }}</span></div>
                                 <div class="stat-heading">Penghasilan</div>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">10029</span></div>
+                                <div class="stat-text"><span class="count">{{ $sales }}</span></div>
                                 <div class="stat-heading">Penjualan</div>
                             </div>
                         </div>
@@ -66,16 +66,16 @@
                                         <th>Status</th>
                                     </tr>
                                 </thead>
-                                {{-- @forelse ($items as $item)    --}}
+                                @forelse ($items as $item)   
                                 <tbody>
                                     <tr>
-                                        <td class="serial">1.</td>
-                                        <td> name </td>
-                                        <td>  <span class="email">email}</span> </td>
-                                        <td> <span class="nomor">number</span> </td>
-                                        <td> <span class="transaction_total">$212</span> </td>
+                                        <td class="serial">{{ $loop->iteration }}.</td>
+                                        <td> {{ $item->name }} </td>
+                                        <td>  <span class="email">{{ $item->email }}</span> </td>
+                                        <td> <span class="nomor">{{ $item->number }}</span> </td>
+                                        <td> <span class="transaction_total">$ {{ $item->transaction_total }}</span> </td>
                                         <td>
-                                            {{-- @if($item->transaction_status == 'PENDING')
+                                            @if($item->transaction_status == 'PENDING')
                                                 <span class="badge badge-info">
                                             @elseif($item->transaction_status == 'SUCCESS')
                                                 <span class="badge badge-success">
@@ -84,18 +84,18 @@
                                             @else
                                                 <span> 
                                             @endif
-                                                {{ $item->transaction_status }} --}}
+                                                {{ $item->transaction_status }}
                                             </span>
                                         </td>
                                     </tr>
                                 </tbody>
-                                {{-- @empty
+                                @empty
                                     <tr>
                                         <td colspan="6" class="text-center p-5">
                                             Data tidak tersedia
                                         </td>
                                     </tr>
-                                @endforelse --}}
+                                @endforelse
                             </table>
                         </div> <!-- /.table-stats -->
                     </div>
@@ -131,9 +131,9 @@
 
         // Pie chart flotPie1
         var piedata = [
-            { label: "Pending", data: [[1, 50]], color: '#5c6bc0'},
-            { label: "Gagal", data: [[1, 50]], color: '#ef5350'},
-            { label: "Sukses", data: [[1, 50]], color: '#66bb6a'}
+            { label: "Pending", data: [[1, {{ $pie['pending'] }}]], color: '#5c6bc0'},
+            { label: "Gagal", data: [[1, {{ $pie['failed'] }}]], color: '#ef5350'},
+            { label: "Sukses", data: [[1, {{ $pie['success'] }}]], color: '#66bb6a'}
         ];
 
         $.plot('#flotPie1', piedata, {
