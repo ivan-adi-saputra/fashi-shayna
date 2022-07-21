@@ -11,15 +11,22 @@
         <div class="header-menu">
 
             <div class="user-area dropdown float-right">
-                <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle" src="{{ url('images/admin.jpg') }}" alt="User Avatar">
+                <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                    Wellcome {{ auth()->user()->name }}
                 </a>
-
+                {{-- <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-house-door"></i> Homepage</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                </ul> --}}
                 <div class="user-menu dropdown-menu">
-                    <a class="nav-link" href=""><i class="fa fa-power -off"></i>Logout</a>
+                    <a class="nav-link" href="{{ route('home') }}"><i class="bi bi-house-door"></i> Homepage</a>
+                    <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                        <button class="nav-link border-0"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                    </form>
                 </div>
             </div>
-
+       
         </div>
     </div>
 </header>
