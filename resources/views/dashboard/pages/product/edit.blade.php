@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('dashboard.layouts.default')
 
 @section('content')
     <div class="card">
@@ -19,12 +19,17 @@
             @error('name') <div class="text-muted">{{ $message }}</div> @enderror
           </div>
           <div class="form-group">
-            <label for="type" class="form-control-label">Tipe Barang</label>
-            <input  type="text"
-                    name="type" 
-                    value="{{ old('type', $item->type) }}" 
-                    class="form-control @error('type') is-invalid @enderror"/>
-            @error('type') <div class="text-muted">{{ $message }}</div> @enderror
+            <label for="category_id" class="form-control-label">Category Barang</label>
+            <br>
+            <select class="form-select" name="category_id">
+              @foreach ($categories as $category)
+                @if(old('category_id', $item->category->id) == $category->id)
+                  <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                @else 
+                  <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endif
+              @endforeach
+            </select>
           </div>
           <div class="form-group">
             <label for="description" class="form-control-label">Deskripsi Barang</label>

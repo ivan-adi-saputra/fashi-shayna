@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Models\Category;
 use Illuminate\Support\Str;
 
 class DashboardProductController extends Controller
@@ -17,7 +18,7 @@ class DashboardProductController extends Controller
      */
     public function index()
     {
-        $item = Product::with('category')->get();
+        $item = Product::where('user_id', auth()->user()->id)->with('category')->get();
         return view('dashboard.pages.product.index', [
             'items' => $item
         ]);
@@ -30,7 +31,9 @@ class DashboardProductController extends Controller
      */
     public function create()
     {
-        return view('dashboard.pages.product.create');
+        return view('dashboard.pages.product.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -42,7 +45,12 @@ class DashboardProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->all();
-        $data['slug'] = Str::slug($data['slug']);
+        $data['slug'] = Str::slug($request->name);
+        $data['user_id'] = auth()->user()->id;
+
+        Product::create($data);
+
+        return redirect()->route('products.index');
         
     }
 
@@ -65,7 +73,11 @@ class DashboardProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Product::with('category')->findOrFail($id);
+        return view('dashboard.pages.product.edit', [
+            'item' => $item, 
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -75,9 +87,16 @@ class DashboardProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        //
+        $data = $request->all(); 
+        $data['slug'] = Str::slug($request->name); 
+        $data['user_id'] = auth()->user()->id;
+
+        $item = Product::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -88,6 +107,9 @@ class DashboardProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Product::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('products.index');
     }
 }
