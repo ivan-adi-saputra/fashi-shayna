@@ -29,8 +29,11 @@
                 </li>
 
                 <li class="menu-title">Category</li><!-- /.menu-title -->
-                <li class="">
-                    <a href=""> <i class="menu-icon bi bi-grid"></i>Lihat Category</a>
+                <li class="{{ Request::is('dashboard/category') ? 'active' : '' }}">
+                    <a href="{{ route('category.index') }}"> <i class="menu-icon bi bi-grid"></i>Lihat Category</a>
+                </li>
+                <li class="{{ Request::is('dashboard/category/create') ? 'active' : '' }}">
+                    <a href="{{ route('category.create') }}"> <i class="menu-icon fa fa-plus"></i>Tambah Category</a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

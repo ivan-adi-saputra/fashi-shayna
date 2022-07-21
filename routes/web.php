@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardGalleryController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\DashboardTransactionController;
@@ -41,3 +42,5 @@ Route::resource('dashboard/galleries', DashboardGalleryController::class)->middl
 
 Route::get('dashboard/transaction/{id}/setstatus', [DashboardTransactionController::class, 'setStatus'])->name('transaction.status');
 Route::resource('dashboard/transaction', DashboardTransactionController::class)->middleware('auth');
+
+Route::resource('dashboard/category', DashboardCategoryController::class)->middleware('auth');
