@@ -41,6 +41,6 @@ Route::resource('dashboard/products', DashboardProductController::class)->middle
 Route::resource('dashboard/galleries', DashboardGalleryController::class)->middleware('auth');
 
 Route::get('dashboard/transaction/{id}/setstatus', [DashboardTransactionController::class, 'setStatus'])->name('transaction.status');
-Route::resource('dashboard/transaction', DashboardTransactionController::class)->middleware('auth');
+Route::resource('dashboard/transaction', DashboardTransactionController::class)->middleware('admin');
 
-Route::resource('dashboard/category', DashboardCategoryController::class)->middleware('auth');
+Route::resource('dashboard/category', DashboardCategoryController::class)->middleware('admin');
