@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardGalleryController;
 use App\Http\Controllers\DashboardProductController;
+use App\Http\Controllers\DashboardTransactionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -32,8 +33,11 @@ Route::get('dashboard', function () {
     return view('dashboard.pages.dashboard');
 })->name('dashboard')->middleware('auth');
 
-Route::get('dashboard/products/{id}/gallery', [DashboardProductController::class, 'gallery'])->name('products-gallery');
+Route::get('dashboard/products/{id}/gallery', [DashboardProductController::class, 'gallery'])->name('products-gallery')->middleware('auth');
 
 Route::resource('dashboard/products', DashboardProductController::class)->middleware('auth');
 
 Route::resource('dashboard/galleries', DashboardGalleryController::class)->middleware('auth');
+
+Route::get('dashboard/transaction/{id}/setstatus', [DashboardTransactionController::class, 'setStatus'])->name('transaction.status');
+Route::resource('dashboard/transaction', DashboardTransactionController::class)->middleware('auth');

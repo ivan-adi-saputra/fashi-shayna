@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('dashboard.layouts.default')
 
 @section('content')
     <div class="orders">
@@ -44,25 +44,25 @@
                                     </td>
                                     <td>
                                         @if( $item->transaction_status == 'PENDING' )
-                                            <a href="{{ route('transactions.status', $item->id) }}?status=SUCCESS" class="btn btn-success btn-sm">
+                                            <a href="{{ route('transaction.status', $item->id) }}?status=SUCCESS" class="btn btn-success btn-sm">
                                                 <i class="fa fa-check"></i>
                                             </a>
-                                            <a href="{{ route('transactions.status', $item->id) }}?status=FAILED" class="btn btn-danger btn-sm">
+                                            <a href="{{ route('transaction.status', $item->id) }}?status=FAILED" class="btn btn-danger btn-sm">
                                                 <i class="fa fa-times"></i>
                                             </a>
                                         @endif
                                        <a href="#mymodal"
-                                        data-remote="{{ route('transactions.show', $item->id) }}"
+                                        data-remote="{{ route('transaction.show', $item->id) }}"
                                         data-toggle="modal"
                                         data-target="#mymodal"
                                         data-title="Detail Transaksi {{ $item->uuid }}"
                                         class="btn btn-info btn-sm">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        <a href="{{ route('transactions.edit', $item->id) }}" class="btn btn-primary btn-sm">
+                                        <a href="{{ route('transaction.edit', $item->id) }}" class="btn btn-primary btn-sm">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <form action="{{ route('transactions.destroy', $item->id) }}" method="post" class="d-inline">
+                                        <form action="{{ route('transaction.destroy', $item->id) }}" method="post" class="d-inline">
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-danger btn-sm">

@@ -24,8 +24,8 @@
                 </li>
 
                 <li class="menu-title">Transaksi</li><!-- /.menu-title -->
-                <li class="">
-                    <a href=""> <i class="menu-icon fa fa-list"></i>Lihat Transaksi</a>
+                <li class="{{ Request::is('dashboard/transaction*') ? 'active' : '' }}">
+                    <a href="{{ route('transaction.index') }}"> <i class="menu-icon fa fa-list"></i>Lihat Transaksi</a>
                 </li>
 
                 <li class="menu-title">Category</li><!-- /.menu-title -->

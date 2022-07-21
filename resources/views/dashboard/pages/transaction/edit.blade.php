@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('dashboard.layouts.default')
 
 @section('content')
     <div class="card">
@@ -7,7 +7,7 @@
         <small>{{ $item->uuid }}</small>
       </div>
       <div class="card-body card-block">
-        <form action="{{ route('transactions.update', $item->id) }}" method="POST">
+        <form action="{{ route('transaction.update', $item->id) }}" method="POST">
           @method('PUT')
           @csrf
           <div class="form-group">
@@ -35,7 +35,7 @@
             @error('number') <div class="text-muted">{{ $message }}</div> @enderror
           </div>
           <div class="form-group">
-            <label for="address" class="form-control-label">Kuantitas Barang</label>
+            <label for="address" class="form-control-label">Address</label>
             <input  type="text"
                     name="address" 
                     value="{{ old('address', $item->address) }}" 
