@@ -11,6 +11,8 @@ class TransactionDetail extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $guarded = ['id'];
+
     public function transaction() 
     {
         return $this->belongsTo(Transaction::class, 'transactions_id');

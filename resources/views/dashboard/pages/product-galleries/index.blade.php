@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('dashboard.layouts.default')
 
 @section('content')
     <div class="orders">
@@ -29,7 +29,7 @@
                                     </td>
                                     <td>{{ $item->is_default ? 'Ya' : 'Tidak' }}</td>
                                     <td>
-                                        <form action="{{ route('product-galleries.destroy', $item->id) }}" method="post" class="d-inline">
+                                        <form action="{{ route('galleries.destroy', $item->id) }}" method="post" class="d-inline">
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-danger btn-sm">

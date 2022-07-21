@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('dashboard.layouts.default')
 
 @section('content')
     <div class="card">
@@ -6,17 +6,20 @@
         <strong>Tambah Foto Barang</strong>
       </div>
       <div class="card-body card-block">
-        <form action="{{ route('product-galleries.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('galleries.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
             <label for="name" class="form-control-label">Nama Barang</label>
             <select name="products_id"
-                    class="form-control @error('products_id') is-invalid @enderror">
+                    class="form-control">
                 @foreach ($products as $product)
-                  <option value="{{ $product->id }}">{{ $product->name }}</option>
+                  @if( old('products_id') == $product->id )
+                    <option value="{{ $product->id }}" selected>{{ $product->name }}</option>
+                  @else 
+                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                  @endif
                 @endforeach
             </select>
-            @error('products_id') <div class="text-muted">{{ $message }}</div> @enderror
           </div>
           <div class="form-group">
             <label for="photo" class="form-control-label">Foto Barang</label>
@@ -24,7 +27,6 @@
                     name="photo" 
                     value="{{ old('photo') }}" 
                     accept="image/*"
-                    required
                     id="imgInp"
                     class="form-control @error('photo') is-invalid @enderror"/>
             <img id="blah" class="mt-3 img-fluid" width="150">

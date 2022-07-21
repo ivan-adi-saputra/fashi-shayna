@@ -18,8 +18,8 @@
           </div>
           <div class="form-group">
             <label for="category_id" class="form-control-label">Category Barang</label>
-            <br>
-            <select class="form-select" name="category_id">
+            <select name="category_id"
+                    class="form-control">
               @foreach ($categories as $category)
                 @if(old('category_id') == $category->id)
                   <option value="{{ $category->id }}" selected>{{ $category->name }}</option>

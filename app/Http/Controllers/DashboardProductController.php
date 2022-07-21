@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
+use App\Models\ProductGalery;
 use Illuminate\Support\Str;
 
 class DashboardProductController extends Controller
@@ -111,5 +112,15 @@ class DashboardProductController extends Controller
         $item->delete();
 
         return redirect()->route('products.index');
+    }
+
+    public function gallery($id)
+    {
+        $product = Product::findOrFail($id);
+        $items = ProductGalery::with('product')->where('products_id', $id)->get();
+        return view('dashboard.pages.product.gallery', [
+            'product' => $product, 
+            'items' => $items
+        ]);
     }
 }

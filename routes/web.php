@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardGalleryController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -19,9 +20,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 })->name('home');
-Route::get('dashboard', function () {
-    return view('dashboard.pages.dashboard');
-})->name('dashboard')->middleware('auth');
 
 Route::get('register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->name('register.store');
@@ -30,4 +28,12 @@ Route::get('login', [LoginController::class, 'index'])->name('login')->middlewar
 Route::post('login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::resource('dashboard/products', DashboardProductController::class);
+Route::get('dashboard', function () {
+    return view('dashboard.pages.dashboard');
+})->name('dashboard')->middleware('auth');
+
+Route::get('dashboard/products/{id}/gallery', [DashboardProductController::class, 'gallery'])->name('products-gallery');
+
+Route::resource('dashboard/products', DashboardProductController::class)->middleware('auth');
+
+Route::resource('dashboard/galleries', DashboardGalleryController::class)->middleware('auth');
