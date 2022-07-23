@@ -72,7 +72,10 @@
                                     <h4>$ {{ $item->price }}.00</h4>
                                 </div>
                                 <div class="quantity">
-                                    <a href="shopping-cart.html" class="primary-btn pd-cart">Add To Cart</a>
+                                    <form action="{{ route('add-cart', $item->id) }}" method="post">
+                                    @csrf
+                                        <button class="primary-btn pd-cart border-0">Add To Cart</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

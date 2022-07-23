@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardGalleryController;
@@ -27,6 +28,10 @@ Route::get('/', function () {
 
 Route::get('product', [ProductController::class, 'index'])->name('product');
 Route::get('product/{id}/details', [ProductController::class, 'details'])->name('product-details');
+
+Route::get('cart', [CartController::class, 'index'])->name('cart');
+Route::post('cart/{id}', [CartController::class, 'cart'])->name('add-cart');
+Route::delete('cart/{id}', [CartController::class, 'destroy'])->name('destroy-cart');
 
 Route::get('register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->name('register.store');
