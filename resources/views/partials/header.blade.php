@@ -29,7 +29,7 @@
                             Keranjang Belanja &nbsp;
                             <a href="#">
                                 {{-- <i class="icon_bag_alt"></i> --}}
-                                <i class="bi bi-bag-dash"></i>
+                                <i class="bi bi-cart-dash"></i>
                                 <span>3</span>
                             </a>
                             <div class="cart-hover">

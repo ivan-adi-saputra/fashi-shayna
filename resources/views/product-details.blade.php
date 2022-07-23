@@ -109,7 +109,7 @@
                             @endif
                             <ul>
                                 <li class="w-icon active">
-                                    <a href="#"><i class="bi bi-bag-dash"></i></a>
+                                    <a href="#"><i class="bi bi-cart-dash"></i></a>
                                 </li>
                                 <li class="quick-view"><a href="{{ route('product-details', $product->id) }}">+ Quick View</a></li>
                             </ul>
