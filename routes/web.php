@@ -25,7 +25,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('product', [ProductController::class, 'index']);
+Route::get('product', [ProductController::class, 'index'])->name('product');
+Route::get('product/{id}/details', [ProductController::class, 'details'])->name('product-details');
 
 Route::get('register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->name('register.store');

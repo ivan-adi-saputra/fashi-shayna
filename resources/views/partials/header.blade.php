@@ -4,7 +4,7 @@
         <div class="container">
             <div class="ht-left">
                 <div class="mail-service">
-                    <i class=" fa fa-envelope"></i>ivanadisaputra@gmail.com
+                    <i class=" fa fa-envelope"></i> ivanadisaputra@gmail.com
                 </div>
                 <div class="phone-service">
                     <i class=" fa fa-phone"></i> +6289 658 142 086
@@ -18,7 +18,7 @@
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
                         <a href="./index.html">
-                            <img src="img/logo_website_shayna.png" alt="" />
+                            <img src="{{ url('img/logo_website_shayna.png') }}" alt="" />
                         </a>
                     </div>
                 </div>
@@ -28,7 +28,8 @@
                         <li class="cart-icon">
                             Keranjang Belanja &nbsp;
                             <a href="#">
-                                <i class="icon_bag_alt"></i>
+                                {{-- <i class="icon_bag_alt"></i> --}}
+                                <i class="bi bi-bag-dash"></i>
                                 <span>3</span>
                             </a>
                             <div class="cart-hover">
@@ -37,7 +38,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="si-pic">
-                                                    <img src="img/select-product-1.jpg" alt="" />
+                                                    <img src="{{ url('img/select-product-1.jpg') }}" alt="" />
                                                 </td>
                                                 <td class="si-text">
                                                     <div class="product-selected">
@@ -51,7 +52,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="si-pic">
-                                                    <img src="img/select-product-2.jpg" alt="" />
+                                                    <img src="{{ url('img/select-product-2.jpg') }}" alt="" />
                                                 </td>
                                                 <td class="si-text">
                                                     <div class="product-selected">
