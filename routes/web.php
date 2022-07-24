@@ -30,6 +30,7 @@ Route::get('/', function () {
 
 Route::get('product', [ProductController::class, 'index'])->name('product');
 Route::get('product/{id}/details', [ProductController::class, 'details'])->name('product-details');
+Route::post('product/{id}', [ProductController::class, 'comment'])->name('add-comment');
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::post('cart/{id}', [CartController::class, 'cart'])->name('add-cart');

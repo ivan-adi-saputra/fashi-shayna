@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\ProductGalery;
 use Illuminate\Http\Request;
@@ -21,10 +22,25 @@ class ProductController extends Controller
         $item = Product::with('category')->findOrFail($id);
         $gallery = ProductGalery::latest()->where('products_id', $id)->get();
         $product = Product::with('category')->latest()->limit(4)->get();
+        $comment = Comment::where('users_id', auth()->user()->id)->get();
         return view('product-details', [
             'item' => $item, 
             'galleries' => $gallery, 
-            'products' => $product
+            'products' => $product, 
+            'comments' => $comment 
         ]);
+    }
+
+    public function comment(Request $request ,$id)
+    {
+        $data = $request->validate([
+            'description' => 'required'
+        ]);
+        $data['products_id'] = $id;
+        $data['users_id'] = auth()->user()->id;
+
+        Comment::create($data); 
+        return redirect()->back();
+
     }
 }

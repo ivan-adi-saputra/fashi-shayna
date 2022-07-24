@@ -38,6 +38,10 @@ class User extends Authenticatable
      {
         return $this->hasMany(Cart::class, 'users_id');
      }
+     public function comment()
+     {
+        return $this->hasMany(Comment::class);
+     }
 
 
     protected $hidden = [

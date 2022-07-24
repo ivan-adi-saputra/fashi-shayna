@@ -1,7 +1,9 @@
 @php
     use App\Models\Cart;
     use App\Models\Product;
-    $carts = Cart::with('product')->where('users_id', auth()->user()->id)->get();
+    if ( Auth::check() ) {
+        $carts = Cart::with('product')->where('users_id', auth()->user()->id)->get();
+    }
     // $total = Product::with('cart')->where('id', 'products_id')->sum('price');
     // $item = Product::where('users_id', auth()->user()->id);
     // $total = collect($item)->sum('price')
@@ -38,14 +40,17 @@
                             <a href="{{ route('cart') }}">
                                 {{-- <i class="icon_bag_alt"></i> --}}
                                 <i class="bi bi-cart-dash"></i>
-                                @if ( $carts->count() )
-                                    <span>{{ $carts->count() }}</span>                               
+                                @if ( Auth::check() && $carts->count() )
+                                    <span>{{ $carts->count() }}</span>   
+                                @else 
+                                    
                                 @endif
                             </a>
                             <div class="cart-hover">
                                 <div class="select-items">
                                     <table>
                                         <tbody>
+                                            @if(Auth::check() && $carts)
                                             @foreach ($carts as $cart)
                                                 <tr>
                                                     <td class="si-pic">
@@ -68,15 +73,16 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="select-total">
                                     {{-- @foreach ( $carts as $cart ) --}}
-                                    {{-- @if ($carts->product->price) --}}
+                                    @if (Auth::check() && $carts)
                                         <span>total:</span>
-                                        <h5>$ {{ $cart->sum('price') }}.00</h5>
-                                    {{-- @endif --}}
+                                        <h5>$ {{ $carts->sum('price') }}.00</h5>
+                                    @endif
                                     {{-- @endforeach --}}
                                 </div>
                                 <div class="select-button">

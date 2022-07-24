@@ -223,4 +223,59 @@
         </div>
     </div>
     <!-- Related Products Section End -->
+
+    {{-- comments --}}
+    <div class="container mt-5">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-8">
+                <div class="d-flex flex-column comment-section">
+                    @if ( $comments )
+                    @foreach ( $comments as $comment )
+                    <div class="bg-white p-2">
+                        <div class="d-flex flex-row user-info">
+                            <img class="rounded-circle" src="{{ url('/img/product-single/avatar-1.png') }}" width="40">
+                            <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{ auth()->user()->name }}</span>
+                                <span class="date text-black-50">{{ $comment->created_at->diffForHumans() }}</span>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <p class="comment-text">{{ $comment->description }}</p>
+                        </div>
+                       
+                    </div>
+                    <div class="bg-white">
+                        <div class="d-flex flex-row fs-12">
+                            <div class="like p-2 cursor">
+                                <i class="fa fa-thumbs-up"></i>
+
+                                {{-- <i class="fa fa-thumbs-o-up"></i> --}}
+
+                                <span class="ml-1">Like</span></div>
+                            <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
+                            <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
+                        </div>
+                    </div>
+
+                    @endforeach
+                    @endif
+
+                    <div class="bg-light p-2">
+                        <form action="{{ route('add-comment', $item->id) }}" method="post">
+                        @csrf
+                        <div class="d-flex flex-row align-items-start">
+                            <img class="rounded-circle" src="{{ url('/img/product-single/avatar-1.png') }}" width="40">
+                            <textarea class="form-control ml-1 shadow-none textarea" name="description">
+                            </textarea>
+                        </div>
+                        <div class="mt-2 text-right">
+                                <button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment</button>
+                                <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
