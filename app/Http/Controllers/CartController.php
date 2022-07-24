@@ -18,9 +18,11 @@ class CartController extends Controller
 
     public function cart($id)
     {
+        $item = Product::findOrFail($id);
         $data = [
             'products_id' => $id,
-            'users_id' => auth()->user()->id
+            'users_id' => auth()->user()->id, 
+            'price' => $item->price
         ];
 
         Cart::create($data);

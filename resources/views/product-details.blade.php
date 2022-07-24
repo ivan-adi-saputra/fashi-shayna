@@ -109,7 +109,10 @@
                             @endif
                             <ul>
                                 <li class="w-icon active">
-                                    <a href="#"><i class="bi bi-cart-dash"></i></a>
+                                    <form action="{{ route('add-cart', $product->id) }}" method="post">
+                                    @csrf
+                                        <button class="btn btn-warning"><i class="bi bi-cart-dash"></i></button>
+                                    </form>
                                 </li>
                                 <li class="quick-view"><a href="{{ route('product-details', $product->id) }}">+ Quick View</a></li>
                             </ul>

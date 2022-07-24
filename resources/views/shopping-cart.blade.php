@@ -46,7 +46,7 @@
                                                     <td class="cart-title first-row text-center">
                                                         <h5>{{ $cart->product->name }}</h5>
                                                     </td>
-                                                    <td class="p-price first-row">$ {{ $cart->product->price }}.00</td>
+                                                    <td class="p-price first-row">$ {{ $cart->price }}.00</td>
                                                     <td class="delete-item">
                                                         <form action="{{ route('destroy-cart', $cart->id) }}" method="post">
                                                         @method('DELETE')
@@ -116,7 +116,7 @@
                                 <div class="proceed-checkout">
                                     <ul>
                                         <li class="subtotal">ID Transaction <span>#SH12000</span></li>
-                                        <li class="subtotal mt-3">Subtotal <span>$240.00</span></li>
+                                        <li class="subtotal mt-3">Subtotal <span>${{ $carts->sum('price') }}.00</span></li>
                                         <li class="subtotal mt-3">Pajak <span>10%</span></li>
                                         @php
                                         $total = 0    

@@ -9,6 +9,8 @@ use App\Http\Controllers\DashboardTransactionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
+use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*

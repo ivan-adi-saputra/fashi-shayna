@@ -36,6 +36,7 @@
                   Category
                 </a>
                 <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/product">All Category</a></li>
                     @foreach( $items as $item )
                         <li><a class="dropdown-item" href="/product?category={{ $item->category->slug }}">{{ $item->category->name }}</a></li>
                     @endforeach
@@ -47,6 +48,9 @@
         <div class="row justify-content-end mb-3">
             <div class="col-md-6">
                 <form action="{{ route('product') }}" method="get">
+                    @if (request('category'))
+                        <input type="hidden" name="category" value="{{ request('category') }}">
+                    @endif
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Search..." name="search" value="{{ request('search') }}">
                         <button class="btn btn-warning" type="submit">Search</button>
@@ -73,7 +77,7 @@
                                     <i class="bi bi-cart-dash"></i>
                                 </button>                            </form>
                         </li>
-                        <li class="quick-view"><a href="">+ Quick View</a></li>
+                        <li class="quick-view"><a href="{{ route('product-details', $item->id) }}">+ Quick View</a></li>
                     </ul>
                 </div>
                 <div class="pi-text">
