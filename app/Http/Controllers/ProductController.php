@@ -15,7 +15,8 @@ class ProductController extends Controller
     public function index() 
     {
         return view('product', [
-            'items' => Product::with('category')->filter(request(['category', 'search']))->latest()->get(), 
+            'items' => Product::with('category')->filter(request(['category', 'search']))->latest()->paginate(8)->withQueryString() , 
+            'categories' => Category::all()
         ]);
     }
 

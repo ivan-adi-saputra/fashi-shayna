@@ -38,8 +38,8 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/product">All Category</a></li>
-                    @foreach( $items as $item )
-                        <li><a class="dropdown-item" href="/product?category={{ $item->category->slug }}">{{ $item->category->name }}</a></li>
+                    @foreach( $categories as $category )
+                        <li><a class="dropdown-item" href="/product?category={{ $category->slug }}">{{ $category->name }}</a></li>
                     @endforeach
                 </ul>
               </div>
@@ -95,6 +95,10 @@
             @endforeach
             </div>
         </div>
+    </div>
+
+    <div>
+        {{ $items->links() }}
     </div>
 </section>
 @endsection
