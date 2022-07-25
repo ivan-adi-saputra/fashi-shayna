@@ -228,13 +228,18 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-center row">
             <div class="col-md-8">
+                <div class="page-header">
+                  <span class="d-block font-weight-bold name">Comments </span>
+                </div> 
+            <div class="col-md-8">
                 <div class="d-flex flex-column comment-section">
                     @if ( $comments )
                     @foreach ( $comments as $comment )
                     <div class="bg-white p-2">
                         <div class="d-flex flex-row user-info">
                             <img class="rounded-circle" src="{{ url('/img/product-single/avatar-1.png') }}" width="40">
-                            <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{ auth()->user()->name }}</span>
+                            <div class="d-flex flex-column justify-content-start ml-2">
+                                <span class="d-block font-weight-bold name">{{ $comment->name }}</span>
                                 <span class="date text-black-50">{{ $comment->created_at->diffForHumans() }}</span>
                             </div>
                         </div>
@@ -269,7 +274,7 @@
                         </div>
                         <div class="mt-2 text-right">
                                 <button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment</button>
-                                <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
+                                {{-- <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button> --}}
                             </form>
                         </div>
                         

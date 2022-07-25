@@ -3,10 +3,12 @@
     <nav class="navbar navbar-expand-sm navbar-default">
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
+                @can('admin')
                 <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
                     <a href="{{ route('dashboard') }}"><i class
                         ="menu-icon fa fa-laptop"></i>Dashboard </a>
                 </li>
+                @endcan
                 <li class="menu-title">Barang</li><!-- /.menu-title -->
                 <li class="{{ Request::is('dashboard/products') ? 'active' : '' }}">
                     <a href="{{ route('products.index') }}"> <i class="menu-icon fa fa-list"></i>Lihat Barang</a>

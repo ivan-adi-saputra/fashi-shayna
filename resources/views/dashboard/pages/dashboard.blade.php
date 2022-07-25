@@ -1,3 +1,5 @@
+@can('admin')   
+
 @extends('dashboard.layouts.default')
 
 @section('content')
@@ -123,6 +125,7 @@
 <!-- .animated -->
     
 @endsection
+@endcan
 @push('after-script')
     <!--Local Stuff-->
 <script>
@@ -317,3 +320,4 @@
     });
 </script>
 @endpush
+

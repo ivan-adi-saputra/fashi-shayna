@@ -4,9 +4,6 @@
     if ( Auth::check() ) {
         $carts = Cart::with('product')->where('users_id', auth()->user()->id)->get();
     }
-    // $total = Product::with('cart')->where('id', 'products_id')->sum('price');
-    // $item = Product::where('users_id', auth()->user()->id);
-    // $total = collect($item)->sum('price')
 @endphp
 <!-- Header Section Begin -->
 <header class="header-section">
@@ -77,18 +74,18 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                @if (Auth::check() && $carts)
                                 <div class="select-total">
                                     {{-- @foreach ( $carts as $cart ) --}}
-                                    @if (Auth::check() && $carts)
                                         <span>total:</span>
                                         <h5>$ {{ $carts->sum('price') }}.00</h5>
+                                        {{-- @endforeach --}}
+                                    </div>
+                                    <div class="select-button">
+                                        <a href="{{ route('cart') }}" class="primary-btn view-card">VIEW CARD</a>
+                                        <a href="{{ route('cart') }}" class="primary-btn checkout-btn">CHECK OUT</a>
+                                    </div>
                                     @endif
-                                    {{-- @endforeach --}}
-                                </div>
-                                <div class="select-button">
-                                    <a href="{{ route('cart') }}" class="primary-btn view-card">VIEW CARD</a>
-                                    <a href="{{ route('cart') }}" class="primary-btn checkout-btn">CHECK OUT</a>
-                                </div>
                             </div>
                         </li>
                     </ul>

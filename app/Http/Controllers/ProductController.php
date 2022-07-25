@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\User;
 use App\Models\Comment;
 use App\Models\Product;
-use App\Models\ProductGalery;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\ProductGalery;
+use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
@@ -21,12 +23,12 @@ class ProductController extends Controller
     {
         $item = Product::with('category')->findOrFail($id);
         $gallery = ProductGalery::latest()->where('products_id', $id)->get();
-        $product = Product::with('category')->latest()->limit(4)->get();
-        $comment = Comment::where('users_id', auth()->user()->id)->get();
+        $relatedProduct = Product::withCount('category')->take(4)->get();
+        $comment = Comment::all();
         return view('product-details', [
             'item' => $item, 
             'galleries' => $gallery, 
-            'products' => $product, 
+            'products' => $relatedProduct, 
             'comments' => $comment 
         ]);
     }
@@ -38,6 +40,7 @@ class ProductController extends Controller
         ]);
         $data['products_id'] = $id;
         $data['users_id'] = auth()->user()->id;
+        $data['name'] = auth()->user()->name;
 
         Comment::create($data); 
         return redirect()->back();

@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardGalleryController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\DashboardTransactionController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
@@ -24,16 +25,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('product', [ProductController::class, 'index'])->name('product');
-Route::get('product/{id}/details', [ProductController::class, 'details'])->name('product-details');
-Route::post('product/{id}', [ProductController::class, 'comment'])->name('add-comment');
+Route::get('product', [ProductController::class, 'index'])->name('product')->middleware('auth');
+Route::get('product/{id}/details', [ProductController::class, 'details'])->name('product-details')->middleware('auth');
+Route::post('product/{id}', [ProductController::class, 'comment'])->name('add-comment')->middleware('auth');
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
-Route::post('cart/{id}', [CartController::class, 'cart'])->name('add-cart');
+Route::post('cart/{id}', [CartController::class, 'cart'])->name('add-cart')->middleware('auth');
 Route::delete('cart/{id}', [CartController::class, 'destroy'])->name('destroy-cart');
 
 Route::get('register', [RegisterController::class, 'index'])->name('register')->middleware('guest');

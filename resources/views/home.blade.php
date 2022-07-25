@@ -32,7 +32,7 @@
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
                         </p>
-                        <a href="#" class="primary-btn">Shop Now</a>
+                        <a href="{{ route('product') }}" class="primary-btn">Shop Now</a>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
                         </p>
-                        <a href="#" class="primary-btn">Shop Now</a>
+                        <a href="{{ route('product') }}" class="primary-btn">Shop Now</a>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,39 @@
         <div class="row">
             <div class="col-lg-12 mt-5">
                 <div class="product-slider owl-carousel">
+                    @foreach ( $items as $item )
                     <div class="product-item">
+                        <div class="pi-pic">
+                            @if ( $item->photo )
+                                <img src="{{ asset('storage/' . $item->photo) }}" alt="" />
+                            @else
+                                <img src="img/mickey1.jpg" alt="" />
+                            @endif
+                            <ul>
+                                <li class="w-icon active">
+                                    <form action="{{ route('add-cart', $item->id) }}" method="POST">
+                                    @csrf
+                                        <button type="submit" class="btn btn-warning">
+                                            <i class="icon_bag_alt"></i>
+                                        </button>
+                                    </form>
+                                </li>
+                                <li class="quick-view"><a href="{{ route('product') }}">+ Quick View</a></li>
+                            </ul>
+                        </div>
+                        <div class="pi-text">
+                            <div class="catagory-name">{{ $item->category->name }}</div>
+                            <a href="#">
+                                <h5>{{ $item->name }}</h5>
+                            </a>
+                            <div class="product-price">
+                                ${{ $item->price }}.00
+                                <span>$35.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                    {{-- <div class="product-item">
                         <div class="pi-pic">
                             <img src="img/mickey1.jpg" alt="" />
                             <ul>
@@ -144,7 +176,7 @@
                                 $34.00
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

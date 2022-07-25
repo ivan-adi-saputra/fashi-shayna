@@ -10,7 +10,7 @@
                     <ul>
                         <li>Address: Setra Duta, Bandung</li>
                         <li>Phone: +628 22081996</li>
-                        <li>Email: hello.shayna@gmail.com</li>
+                        <li>Email: ivanadisaputra@gmail.com</li>
                     </ul>
                     <div class="footer-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
@@ -24,7 +24,7 @@
                 <div class="footer-widget">
                     <h5>Information</h5>
                     <ul>
-                        <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ route('products.index') }}">Dashboard</a></li>
                         <li><a href="#">Checkout</a></li>
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">Serivius</a></li>
